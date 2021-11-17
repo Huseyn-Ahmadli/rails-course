@@ -24,6 +24,9 @@ ActiveRecord::Schema.define(version: 2021_11_17_135007) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.float "height"
+    t.index ["name"], name: "index_items_on_name"
+    t.index ["price"], name: "index_items_on_price"
+    t.index ["weight"], name: "index_items_on_weight"
   end
 
 end

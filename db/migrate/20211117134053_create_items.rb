@@ -8,5 +8,9 @@ class CreateItems < ActiveRecord::Migration[6.1]
       t.float :weight
       t.timestamps
     end
+
+    add_index :items,:price
+    add_index :items,:weight
+    add_index :items,:name
   end
 end
