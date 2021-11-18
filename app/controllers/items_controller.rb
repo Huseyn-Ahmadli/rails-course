@@ -4,15 +4,35 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.all
-    render body: @items.map { |i|
-      "#{i.name}:#{i.price}"
-    }
   end
 
   def create
     item = Item.create(items_params)
     if item.persisted?
       render json: item.name, status: :created
+    else
+      render json: item.errors.full_messages, status: :unprocessable_entity
+    end
+
+  end
+
+  def show
+    render body: 'User not exist', status: 404 unless (@item = Item.where(id: params[:id]).first)
+  end
+
+  def edit
+    render body: 'User not exist', status: 404 unless (@item = Item.where(id: params[:id]).first)
+  end
+
+  def update
+    Item.where(id: params[:id]).update(items_params)
+    redirect_to item_path
+  end
+
+  def destroy
+    item = Item.where(id: params[:id]).first.destroy
+    if item.destroyed?
+      redirect_to items_path
     else
       render json: item.errors.full_messages, status: :unprocessable_entity
     end

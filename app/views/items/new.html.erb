@@ -1,0 +1,9 @@
+<h1 style="color:#c45d5d;margin:0 auto">Create new item</h1>
+
+<%= form_tag items_path, method: :post do %>
+  <%= label_tag :name %>
+  <%= text_field_tag :name %>
+  <%= label_tag :price %>
+  <%= number_field_tag :price,nil, min:0 %>
+  <%= submit_tag "Save",class: "btn btn-large btn-primary"%>
+<% end %>
