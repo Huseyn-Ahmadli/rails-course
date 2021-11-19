@@ -1,4 +1,4 @@
-<h1 style="color:#c45d5d;margin:0 auto">All items</h1>
+<h1 style="color:#c45d5d;margin:0 auto">all items</h1>
 
 <% @items.each do |item| %>
   <ul>
@@ -6,7 +6,7 @@
     <li><%= item.price %></li>
     <li><%= item.description %></li>
     <li><%= button_to 'delete', item_path(item), method: :delete %></li>
-
-
   </ul>
 <% end %>
+<br/>
+<%= link_to 'new_item', new_item_path %>

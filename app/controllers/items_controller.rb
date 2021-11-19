@@ -9,7 +9,7 @@ class ItemsController < ApplicationController
   def create
     item = Item.create(items_params)
     if item.persisted?
-      render json: item.name, status: :created
+      redirect_to items_path
     else
       render json: item.errors.full_messages, status: :unprocessable_entity
     end
@@ -36,7 +36,6 @@ class ItemsController < ApplicationController
     else
       render json: item.errors.full_messages, status: :unprocessable_entity
     end
-
   end
 
   private
