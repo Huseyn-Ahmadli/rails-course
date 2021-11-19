@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   layout false
   skip_before_action :verify_authenticity_token
+  before_action :find_item, only: %i[show edit update destroy]
 
   def index
     @items = Item.all
@@ -16,22 +17,16 @@ class ItemsController < ApplicationController
 
   end
 
-  def show
-    @item = Item.find(params[:id])
-  end
+  def show; end
 
-  def edit
-    render body: 'User not exist', status: 404 unless (@item = Item.where(id: params[:id]).first)
-  end
+  def edit; end
 
   def update
-    Item.where(id: params[:id]).update(items_params)
     redirect_to item_path
   end
 
   def destroy
-    item = Item.where(id: params[:id]).first.destroy
-    if item.destroyed?
+    if @item.destroy.destroyed?
       redirect_to items_path
     else
       render json: item.errors.full_messages, status: :unprocessable_entity
@@ -42,6 +37,10 @@ class ItemsController < ApplicationController
 
   def items_params
     params.permit(:price, :name, :real, :height, :weight, :description)
+  end
+
+  def find_item
+    @item = Item.find(params[:id])
   end
 
 end
