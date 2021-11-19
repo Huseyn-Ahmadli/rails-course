@@ -17,7 +17,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    render body: 'User not exist', status: 404 unless (@item = Item.where(id: params[:id]).first)
+    @item = Item.find(params[:id])
   end
 
   def edit
