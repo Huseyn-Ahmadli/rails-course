@@ -9,6 +9,4 @@ class Item < ApplicationRecord
   after_create { p 'create' }
   after_update { p 'update' }
   after_destroy { p 'destroy' }
-
-
 end
