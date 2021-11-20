@@ -8,11 +8,11 @@ class ItemsController < ApplicationController
   end
 
   def create
-    item = Item.create(items_params)
-    if item.persisted?
+    @item = Item.create(items_params)
+    if @item.persisted?
       redirect_to items_path
     else
-      render json: item.errors.full_messages, status: :unprocessable_entity
+      render json: @item.errors.full_messages, status: :unprocessable_entity
     end
 
   end
@@ -29,7 +29,7 @@ class ItemsController < ApplicationController
     if @item.destroy.destroyed?
       redirect_to items_path
     else
-      render json: item.errors.full_messages, status: :unprocessable_entity
+      render json: @item.errors.full_messages, status: :unprocessable_entity
     end
   end
 

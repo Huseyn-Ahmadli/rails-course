@@ -1,0 +1,40 @@
+doctype html
+html
+  style
+    | table {border: 1px solid black;width: 100%;} td {border: 1px solid;padding:8px;}
+    | h1 {color: #c45d5d; font-weight: bold; font-size:}
+    | .btn_edit_item {margin-bottom:10px;color: white; background-color: green;font-weight: bold,display:inline-block;}
+    | .btn_delete_item {margin-bottom:10px;color: white; background-color: black;font-weight: bold,display:inline-block;}
+  h1 all items
+table
+  thead
+    tr
+      th
+        | Name
+      th
+        | Description
+      th
+        | Price
+      th
+        | Price
+      th style="length:20px"
+        |Action
+  tbody
+  - @items.each do |item|
+    tr
+      td
+        = link_to item.name, item_path(item)
+      td
+        = item.description
+      td
+        = item.price
+      td
+        = item.weight
+      td
+        = button_to "edit",edit_item_path(item), method: :get, :class => "btn_edit_item"
+        = button_to "delete",item_path(item), method: :delete, :class => "btn_delete_item"
+
+
+br
+= link_to "new_item", new_item_path
+
