@@ -42,7 +42,7 @@ class ItemsController < ApplicationController
   end
 
   def expensive
-    @items = Item.where('price > 50')
+    @items = Item.where('price > 50').order(:id)
     render :index
   end
 
