@@ -1,0 +1,44 @@
+doctype html
+html
+  style
+    |  table {border: 1px solid black;margin:5px;text-align:center;}
+    |  td {white-space: nowrap;border: 1px solid;padding:5px;}
+    |  h1 {color: #c45d5d; font-weight: bold; font-size:}
+    |  .edit-item,.delete-item,.vote-item {display: inline-block;margin:5px;color:white;background-color:green}
+
+- unless @items.empty?
+  h1 all items
+  table
+    thead
+      tr
+        th Name
+        th Description
+        th Price
+        th Weight
+        th Rating
+        th style="length:20px"Action
+    tbody
+    - @items.each do |item|
+      tr
+        td = link_to item.name, item_path(item)
+        td = item.description
+        td = item.price
+        td = item.weight
+        td
+          = item.votes_count
+          = button_to "+",upvote_item_path(item), method: :get, form_class: "vote-item"
+        td
+          = button_to "edit",edit_item_path(item), method: :get, form_class: "edit-item ", style: "background-color:green;color:white"
+          = button_to "delete",item_path(item), method: :delete, form_class: "delete-item", style: "background-color:darkred;color:white"
+
+  p
+  = button_to "new_item", new_item_path, method: :get
+  p
+  = button_to "only expensive", expensive_items_path, method: :get
+  p
+  = button_to "index", items_path, method: :get
+  p
+
+  =render partial: 'shared/email'
+- else
+
